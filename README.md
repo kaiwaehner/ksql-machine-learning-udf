@@ -13,6 +13,13 @@ Each row (i.e. message input from the sensor to Kafka) represents a single heart
 
 The [User-Defined KSQL Function ‘AnomalyKudf’ applies an H2O Neural Network](https://github.com/kaiwaehner/ksql/blob/4.0.x/ksql-engine/src/main/java/io/confluent/ksql/function/udf/ml/AnomalyKudf.java). The class creates a new object instance of the Deep Learning model and applies it to the incoming sensor messages for detection of anomalies. 
 
+# Implementation of the H2O Deep Learning KSQL UDF
+The UDF implementation can be found in the class [AnomalyKudf.java](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/udf/ml/AnomalyKudf.java). 
+
+I also embedded the [H2O Deep Learning Model](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/udf/ml/DeepLearning_model_R_1509973865970_1.java) directly into the same project package for simplicity.
+
+This new UDF needs then be registered in [FunctionRegistry](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/FunctionRegistry.java). That's it. You can rebuild the KSQL project and then use the new UDF in your KSQL queries. 
+
 # Quick Start for KSQL Machine Learning UDF
 How to test this implementation?
 
