@@ -68,8 +68,10 @@ select eventid, anomaly(SENSORINPUT) from healthsensor;
  
 create stream AnomalyDetection as select rowtime, eventid, CAST (anomaly(sensorinput) AS DOUBLE) as Anomaly from healthsensor;
  
-create stream AnomalyDetection as select rowtime, CAST (anomaly(sensorinput) AS DOUBLE) as Anomaly from healthsensor where CAST (anomaly(sensorinput) AS DOUBLE) >1;
+create stream AnomalyDetectionWithFilter as select rowtime, eventid, CAST (anomaly(sensorinput) AS DOUBLE) as Anomaly from healthsensor where CAST (anomaly(sensorinput) AS DOUBLE) >1.2;
  
 select rowtime, eventid, anomaly from AnomalyDetection;
+
+select rowtime, eventid, anomaly from AnomalyDetectionWithFilter;
  
 kafka-console-consumer --bootstrap-server localhost:9092 --topic AnomalyDetection --from-beginning
