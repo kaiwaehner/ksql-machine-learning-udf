@@ -2,7 +2,7 @@
 
 This project includes the source code and documentation to add a User Defined Function (UDF) for Deep Learning.
 
-It contains the source code which I added to my fork of Confluent's KSQL project to add a User Defined Function (UDF) for Deep Learning. The [complete project (i.e. a fork of the KSQL project + the Deep Learning UDF) can be found here](https://github.com/kaiwaehner/ksql). Just clone and build that project to try out the UDF in KSQL CLI or GUI.
+It contains the source code which I added to my fork of Confluent's KSQL project to add a User Defined Function (UDF) for Deep Learning. The [complete project (i.e. a fork of the KSQL project + the Deep Learning UDF) can be found here](https://github.com/kaiwaehner/ksql-fork-with-deep-learning-function). Just clone and build that project to try out the UDF in KSQL CLI or GUI.
 
 ## Use Case: Continuous Health Checks with Anomaly Detection
 The following example leverages a pre-trained analytic model within a KSQL UDF for continuous stream processing in real time to do health checks and alerting in case of risk. The Kafka ecosystem is used for inference, monitoring and alerting:
@@ -34,7 +34,7 @@ This new UDF needs then be registered in [FunctionRegistry](https://github.com/k
 # Quick Start for KSQL Machine Learning UDF
 How to test this implementation?
 
-Either add the code of this project to your KSQL clone or just clone the following which already includes all code and offer the UDF for Anomaly Detection without any code changes: [KSQL UDF for Anomaly Detection](https://github.com/kaiwaehner/ksql).
+Either add the code of this project to your KSQL clone or just clone the following which already includes all code and offer the UDF for Anomaly Detection without any code changes: [KSQL UDF for Anomaly Detection](https://github.com/kaiwaehner/ksql-fork-with-deep-learning-function).
 
 The analytic model and its dependency is already included in this project. You just have to start Kafka and the KSQL engine to send input streams for inference. 
 
