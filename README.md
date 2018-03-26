@@ -1,19 +1,22 @@
-# ksql-machine-learning-udf
+# Deep Learning Function for Apache Kafka's KSQL
 *Confluent KSQL Addon - User Defined Function (UDF) for Machine Learning*
 
-This project contains the code which I added to Confluent's KSQL project to add a User Defined Function (UDF) for Machine Learning. The [implementation can be found in my fork of the KSQL project](https://github.com/kaiwaehner/ksql). 
+This project includes code and documentation to add a User Defined Function (UDF) for Deep Learning
 
-This project also contains the quickstart guide to try out the KSQL ML UDF. 
+It contains the code which I added to Confluent's KSQL project to add a User Defined Function (UDF) for Deep Learning. The full [implementation can be found in my fork of the KSQL project](https://github.com/kaiwaehner/ksql). 
 
-# Use Case: Continuous Health Checks with Anomaly Detection
-The following example leverages a pre-trained analytic model within a KSQL UDF for continuous stream processing in real time to do health checks and alerting in case of risk. The Kafka ecosystem is used for inference, monitoring and alerting
+## Use Case: Continuous Health Checks with Anomaly Detection
+The following example leverages a pre-trained analytic model within a KSQL UDF for continuous stream processing in real time to do health checks and alerting in case of risk. The Kafka ecosystem is used for inference, monitoring and alerting:
 
-# Deep Learning with an H2O Autoencoder for Sensor Analytics
+![Apache Kafka, KSQL, Internet of Things, Deep Learning](Apache_Kafka_KSQL_Internet_of_Things_Deep_Learning_Scenario.png)
+
+
+## Deep Learning with an H2O Autoencoder for Sensor Analytics
 Each row (i.e. message input from the sensor to Kafka) represents a single heartbeat and contains over 200 columns with numbers. 
 
 The [User-Defined KSQL Function ‘AnomalyKudf’ applies an H2O Neural Network](https://github.com/kaiwaehner/ksql/blob/4.0.x/ksql-engine/src/main/java/io/confluent/ksql/function/udf/ml/AnomalyKudf.java). The class creates a new object instance of the Deep Learning model and applies it to the incoming sensor messages for detection of anomalies. 
 
-# Implementation of the H2O Deep Learning KSQL UDF
+## Implementation of the H2O Deep Learning KSQL UDF
 The UDF implementation can be found in the class [AnomalyKudf.java](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/udf/ml/AnomalyKudf.java). 
 
 I also embedded the [H2O Deep Learning Model](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/udf/ml/DeepLearning_model_R_1509973865970_1.java) directly into the same project package for simplicity.
