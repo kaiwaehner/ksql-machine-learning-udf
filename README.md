@@ -1,9 +1,8 @@
-# Deep Learning Function for Apache Kafka's KSQL
-*Confluent KSQL Addon - User Defined Function (UDF) for Machine Learning*
+# Deep Learning Function (UDF) for Apache Kafka's KSQL
 
-This project includes code and documentation to add a User Defined Function (UDF) for Deep Learning
+This project includes the source code and documentation to add a User Defined Function (UDF) for Deep Learning.
 
-It contains the code which I added to Confluent's KSQL project to add a User Defined Function (UDF) for Deep Learning. The full [implementation can be found in my fork of the KSQL project](https://github.com/kaiwaehner/ksql). 
+It contains the source code which I added to my fork of Confluent's KSQL project to add a User Defined Function (UDF) for Deep Learning. The [complete project (i.e. a fork of the KSQL project + the Deep Learning UDF) can be found here](https://github.com/kaiwaehner/ksql). Just clone and build that project to try out the UDF in KSQL CLI or GUI.
 
 ## Use Case: Continuous Health Checks with Anomaly Detection
 The following example leverages a pre-trained analytic model within a KSQL UDF for continuous stream processing in real time to do health checks and alerting in case of risk. The Kafka ecosystem is used for inference, monitoring and alerting:
@@ -17,16 +16,29 @@ Each row (i.e. message input from the sensor to Kafka) represents a single heart
 The [User-Defined KSQL Function ‘AnomalyKudf’ applies an H2O Neural Network](https://github.com/kaiwaehner/ksql/blob/4.0.x/ksql-engine/src/main/java/io/confluent/ksql/function/udf/ml/AnomalyKudf.java). The class creates a new object instance of the Deep Learning model and applies it to the incoming sensor messages for detection of anomalies. 
 
 ## Implementation of the H2O Deep Learning KSQL UDF
+Three steps are needed to implement your own UDF:
+
+**1) Implement the UDF (Kudf Interface)**
+
 The UDF implementation can be found in the class [AnomalyKudf.java](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/udf/ml/AnomalyKudf.java). 
 
-I also embedded the [H2O Deep Learning Model](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/udf/ml/DeepLearning_model_R_1509973865970_1.java) directly into the same project package for simplicity.
 
-This new UDF needs then be registered in [FunctionRegistry](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/FunctionRegistry.java). That's it. You can rebuild the KSQL project and then use the new UDF in your KSQL queries. 
+**2) Embed the analytic model**
+
+I embedded a [H2O Deep Learning Model](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/udf/ml/DeepLearning_model_R_1509973865970_1.java) directly into the same project package for simplicity. You can embed any other model the same way, no matter if it is just Java source code or other dependencies like .zip files.
+
+**3) Register new UDF to FunctionRegistry**
+
+This new UDF needs then be registered in [FunctionRegistry](https://github.com/kaiwaehner/ksql-machine-learning-udf/blob/master/function/FunctionRegistry.java). That's it. You can rebuild the KSQL project and then use the new UDF in your KSQL queries using the KSQL CLI or GUI. 
 
 # Quick Start for KSQL Machine Learning UDF
 How to test this implementation?
 
-The analytic model and its dependency is already included in this project. You just have to start Kafka and the KSQL engine to send input streams for inference. Here are the steps:
+Either add the code of this project to your KSQL clone or just clone the following which already includes all code and offer the UDF for Anomaly Detection without any code changes: [KSQL UDF for Anomaly Detection](https://github.com/kaiwaehner/ksql).
+
+The analytic model and its dependency is already included in this project. You just have to start Kafka and the KSQL engine to send input streams for inference. 
+
+**Here are the steps to try it out:**
 
 confluent start kafka
  
